@@ -78,30 +78,28 @@ claude config set --project allowedTools "Bash(*)"
 
 ## 사용법
 
+직접 명령어를 입력하거나, 자연스럽게 대화하면 자동으로 실행됩니다.
+
+### 직접 실행
+
 ```
 /deep-study {주제}
 ```
 
-이게 전부입니다. 나머지는 전부 자동으로 실행됩니다.
+### 자동 트리거
 
-### 사용 예시
+아래처럼 말하면 Deep Study가 자동으로 시작됩니다:
 
-```bash
-# iOS
-/deep-study WKWebView
-/deep-study Swift Concurrency
-/deep-study Core Data
-
-# Android
-/deep-study Jetpack Compose
-/deep-study Coroutines
-/deep-study Room Database
-
-# Web
-/deep-study React Server Components
-/deep-study WebSocket
-/deep-study Service Workers
 ```
+WKWebView 공부하고 싶어
+Swift Concurrency 딥다이브 해줘
+Jetpack Compose가 내부적으로 어떻게 동작하는지 알고 싶어
+React Server Components 깊이 파보고 싶어
+how does Core Data work under the hood?
+study WebSocket
+```
+
+코드를 읽다가 모르는 개념을 만났을 때, 기술의 내부 동작 원리가 궁금할 때, 면접 준비를 위해 깊이 있게 정리하고 싶을 때 — 자연스럽게 물어보시면 됩니다.
 
 ### 첫 실행 시 프로필 설정
 
