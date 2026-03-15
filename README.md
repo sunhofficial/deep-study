@@ -1,141 +1,90 @@
-<p align="center">
-  <img src="assets/banner.png" alt="Deep Study — From Single Command to Expert Knowledge Base" width="800">
-</p>
-
 <h1 align="center">Deep Study</h1>
 
 <p align="center">
-  <strong>One command. 10+ interconnected notes. From zero to deep understanding.</strong>
+  <strong>한 줄 명령어 → 10개 이상의 Obsidian 학습 노트. 자동으로.</strong>
 </p>
 
 <p align="center">
-  <a href="#install">Install</a> •
-  <a href="#how-it-works">How It Works</a> •
-  <a href="#features">Features</a> •
-  <a href="#examples">Examples</a> •
-  <a href="#한국어">한국어</a>
+  <a href="#설치">설치</a> •
+  <a href="#사용법">사용법</a> •
+  <a href="#동작-과정">동작 과정</a> •
+  <a href="#출력-결과">출력 결과</a> •
+  <a href="#english">English</a>
 </p>
 
 ---
 
-You encounter unfamiliar code at work. You Google. Open 15 tabs. Skim. Forget everything by Friday.
+회사에서 처음 보는 코드를 만났다. 구글링. 탭 15개. 대충 훑기. 금요일이면 다 까먹는다.
 
-**Deep Study** compresses that entire cycle into a single command — and outputs structured Obsidian notes you'll actually revisit.
+**Deep Study**는 이 과정을 명령어 한 줄로 압축한다 — 그리고 진짜 다시 볼 수 있는 Obsidian 노트로 남긴다.
 
 ```
 /deep-study WKWebView
 ```
 
-That's it. Go grab coffee. Come back to **10+ deep-dive notes** with architecture diagrams, production code, troubleshooting guides, and a quiz — all wikilinked and ready in Obsidian.
+커피 한 잔 마시고 오면 **10개 이상의 딥다이브 노트**가 준비되어 있다. 아키텍처 다이어그램, 프로덕션 코드, 트러블슈팅 가이드, 퀴즈까지 — 전부 위키링크로 연결되어 Obsidian에서 바로 열린다.
 
 ---
 
-## Install
+## 설치
 
 ```bash
 claude plugin add sunhofficial/deep-study
 ```
 
 <details>
-<summary>Alternative: install as standalone skill</summary>
+<summary>다른 방법: git clone으로 설치</summary>
 
 ```bash
-git clone https://github.com/sunho/deep-study.git
+git clone https://github.com/sunhofficial/deep-study.git
 claude skill add ./deep-study/skills/deep-study
 ```
 
 </details>
 
-First run walks you through setup (experience level, platform, NotebookLM auth). Takes ~2 minutes once.
+### 필요한 도구
 
----
+| 도구 | 설치 |
+|------|------|
+| [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | `npm install -g @anthropic-ai/claude-code` |
+| [Obsidian](https://obsidian.md/) | 사이트에서 다운로드 |
+| [notebooklm-py](https://github.com/nicholasgasior/notebooklm-py) | `pipx install "notebooklm-py[browser]"` |
 
-## How It Works
+<details>
+<summary><strong>NotebookLM 인증 (최초 1회)</strong></summary>
 
-```
-/deep-study {topic}
-       │
-       ▼
-  ┌─────────────┐    ┌──────────────┐    ┌──────────────┐    ┌────────────────┐
-  │  Phase 1    │    │   Phase 2    │    │   Phase 3    │    │    Phase 4     │
-  │ Code Scan   │───▶│  Web Search  │───▶│  NotebookLM  │───▶│ Obsidian Notes │
-  │             │    │              │    │              │    │                │
-  │ Your project│    │ 8-15 URLs    │    │ Study guide  │    │ 10+ notes      │
-  │ grep/read   │    │ Docs, blogs  │    │ Quiz         │    │ Wikilinks      │
-  │ patterns    │    │ YouTube      │    │ Flashcards   │    │ Diagrams       │
-  │             │    │ Open-source  │    │ Infographic  │    │ Practice quiz  │
-  └─────────────┘    └──────────────┘    └──────────────┘    └────────────────┘
-                                                                     │
-                                                                     ▼
-                                                              Auto-opens in
-                                                                Obsidian
+notebooklm-py 설치 후 Google 계정으로 인증:
+
+```bash
+notebooklm login
 ```
 
-**Fully automatic.** No confirmations between phases. Start it and walk away.
+브라우저에서 Google 로그인하면 끝. 이후 스킬이 자동으로 인증 상태를 확인한다.
 
----
+</details>
 
-## What You Get
+<details>
+<summary><strong>권장: Bash 권한 허용</strong></summary>
 
-```
-Deep Study/WKWebView/
-  assets/infographic.png              ← NotebookLM visual overview
-  00-MOC.md                           ← Learning map + mind-map + resources
-  01-멀티프로세스 아키텍처.md           ← How IPC works via Mach ports
-  02-WKWebViewConfiguration과 생명주기.md
-  03-SwiftUI 통합 (UIViewRepresentable).md
-  04-JavaScript 브릿지.md
-  05-WKContentWorld와 스크립트 격리.md
-  06-Navigation과 로딩 제어.md
-  07-쿠키와 세션 관리.md
-  08-프로세스 종료와 빈 화면 복구.md
-  09-보안 (App-bound Domains, ITP).md
-  10-성능 최적화와 예열.md
-  11-우리 프로젝트 분석.md              ← Your codebase: what's good, what to fix
-  Practice.md                          ← 15 collapsible quiz questions
+Deep Study는 NotebookLM CLI 등 Bash 명령어를 자주 실행한다. 중간에 권한 팝업 없이 실행하려면:
+
+```bash
+claude config set --project allowedTools "Bash(*)"
 ```
 
-### Not your typical study notes
-
-Every concept note goes **deep**:
-
-| Section | What's Inside |
-|---------|---------------|
-| **핵심 요약** | 3-line TL;DR — readable standalone |
-| **상세 설명** | Internal mechanics + design rationale + Mermaid diagrams |
-| **실전 코드** | Basic usage → production-grade (copy-pasteable) |
-| **트러블슈팅** | Real-world bugs with root-cause analysis |
-| **Related** | `[[wikilinks]]` to connected notes |
+</details>
 
 ---
 
-## Before vs After
+## 사용법
 
-| | Without Deep Study | With Deep Study |
-|---|---|---|
-| **Time** | 2-3 hours googling + reading | ~15 min (automated) |
-| **Output** | 15 browser tabs, nothing saved | 10+ structured Obsidian notes |
-| **Depth** | Surface-level blog skimming | Internal mechanics + source-level |
-| **Your code** | Not analyzed | Patterns identified + improvements suggested |
-| **Retention** | Forget by Friday | Quiz + wikilinked notes to revisit |
-| **Diagrams** | None | Mermaid in every note |
+```
+/deep-study {주제}
+```
 
----
+이게 전부다. 나머지는 자동이다.
 
-## Features
-
-- **Adaptive depth** — Junior gets step-by-step basics; senior gets framework internals and tradeoffs
-- **Platform-aware** — iOS (WWDC, ARC, Swift) / Android (I/O, GC, Kotlin) / Web (MDN, V8, TypeScript)
-- **NotebookLM integration** — Study guide + quiz + flashcards + infographic + mind-map
-- **Project analysis** — Scans your actual codebase, finds patterns and improvement points
-- **Obsidian-native** — Wikilinks, collapsible callouts, Mermaid diagrams, graph view ready
-- **Practice quiz** — 12-18 questions: `[recall]` `[application]` `[analysis]` `[interview]`
-- **Auto-replacement** — Failed NotebookLM sources are automatically replaced with new URLs
-- **One command** — Runs Phase 1→2→3→4 without stopping for confirmation
-
----
-
-## Examples
+### 사용 예시
 
 ```bash
 # iOS
@@ -154,77 +103,151 @@ Every concept note goes **deep**:
 /deep-study Service Workers
 ```
 
----
+### 첫 실행 시 프로필 설정
 
-## Adapts to You
+처음 한 번만 물어보고, `~/.config/deep-study/config.json`에 저장된다:
 
-On first run, you pick your profile:
-
-| Setting | Options |
-|---------|---------|
-| **Level** | `junior` · `mid` · `senior` |
-| **Platform** | `ios` · `android` · `web-frontend` · `web-backend` |
-| **Language** | `swift` · `kotlin` · `typescript` · `python` |
+| 설정 | 선택지 | 영향 |
+|------|--------|------|
+| **경험 수준** | `junior` · `mid` · `senior` | 노트 깊이, 코드 예시 스타일, 퀴즈 난이도 |
+| **플랫폼** | `ios` · `android` · `web-frontend` · `web-backend` | 검색 키워드, 오픈소스 레퍼런스, 면접 질문 |
+| **언어** | `swift` · `kotlin` · `typescript` · `python` | 코드 예시 언어 |
 
 <details>
-<summary><strong>How level affects output</strong></summary>
+<summary><strong>경험 수준별 차이</strong></summary>
 
 | | junior | mid | senior |
 |---|--------|-----|--------|
-| **Prerequisites** | Detailed + links | Keywords + 1-line | Omitted |
-| **Difficulty** | 70% essential | Balanced | 50%+ advanced |
-| **Note depth** | Step-by-step | "Why" + patterns | Internals / source-level |
-| **Code** | Heavy comments | Production-ready | Minimal + key points |
-| **Quiz** | Recall-heavy | Balanced | Analysis/interview-heavy |
-
-</details>
-
-Config saved to `~/.config/deep-study/config.json`. Change anytime.
-
----
-
-## Prerequisites
-
-| Tool | Required | Install |
-|------|----------|---------|
-| [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | Yes | `npm install -g @anthropic-ai/claude-code` |
-| [Obsidian](https://obsidian.md/) | Yes | Download from site |
-| [notebooklm-py](https://github.com/nicholasgasior/notebooklm-py) | Yes | `pipx install "notebooklm-py[browser]"` |
-
-<details>
-<summary><strong>NotebookLM auth setup</strong></summary>
-
-After installing notebooklm-py, authenticate with Google:
-
-```bash
-notebooklm login
-```
-
-Complete the Google login in your browser. This is a one-time step.
-
-The skill auto-checks auth on every run and will prompt you if it expires.
-
-</details>
-
-<details>
-<summary><strong>Recommended: allow Bash for uninterrupted runs</strong></summary>
-
-Deep Study runs many Bash commands (NotebookLM CLI, file operations). To avoid permission prompts:
-
-```bash
-claude config set --project allowedTools "Bash(*)"
-```
+| **선수 지식** | 상세 설명 + 링크 | 키워드 + 한 줄 | 생략 (이미 안다고 가정) |
+| **난이도 비율** | 필수 70% | 균형 | 심화 50% 이상 |
+| **노트 깊이** | 기초부터 단계별 | "왜" + 실무 패턴 | 내부 구현 / 소스 레벨 |
+| **코드 예시** | 주석 많이 | 프로덕션 레벨 | 핵심만 |
+| **퀴즈** | 개념 확인 위주 | 균형 | 분석/면접 위주 |
 
 </details>
 
 ---
 
-## Caveats
+## 동작 과정
 
-- **NotebookLM** uses an [unofficial API](https://github.com/nicholasgasior/notebooklm-py). Free tier has daily generation limits.
-- **Source failures** are common (Medium, paywalled sites). The skill auto-replaces them.
-- **Visual artifacts** (infographic, mind-map) may occasionally fail. The skill proceeds without them.
-- **Notes are in Korean** by default. Searches run in both Korean and English.
+명령어 하나로 4단계가 자동 실행된다. **중간에 확인을 묻지 않는다.**
+
+### Phase 1: 프로젝트 코드 분석
+
+현재 작업 중인 프로젝트에서 주제와 관련된 코드를 찾는다.
+
+- 파일명, 클래스명, import, 함수명으로 검색
+- 관련 파일을 읽고 사용 패턴 분석
+- 장점과 개선 포인트를 정리
+
+> 프로젝트 디렉토리가 아니면 이 단계는 자동으로 건너뛴다.
+
+### Phase 2: 학습 자료 수집
+
+웹에서 8~15개의 고품질 자료를 자동 수집한다.
+
+- **공식 문서** — Apple Developer Docs, MDN 등 (최우선)
+- **블로그/아티클** — 한국어 + 영어 검색
+- **YouTube** — WWDC, Google I/O, 컨퍼런스 영상
+- **오픈소스** — 잘 구현된 프로젝트의 특정 파일/모듈 링크
+
+### Phase 3: NotebookLM 통합
+
+수집한 자료를 Google NotebookLM에 넣고 AI가 생성:
+
+| 생성물 | 설명 |
+|--------|------|
+| **Study Guide** | 주제별 정리된 학습 가이드 (한국어) |
+| **Quiz** | 객관식 퀴즈 10문항 |
+| **Flashcards** | 핵심 개념 플래시카드 |
+| **Infographic** | 시각적 개념 정리 이미지 (PNG) |
+| **Mind Map** | 주제 구조 마인드맵 (Mermaid로 변환) |
+
+### Phase 4: Obsidian 노트 생성
+
+Phase 1~3의 결과를 종합해서 **멀티노트 Obsidian 출력**을 작성한다.
+
+- 주제를 실무 고민 단위로 8~12개 노트로 분리
+- 각 노트에 Mermaid 다이어그램, 프로덕션 코드, 트러블슈팅 포함
+- 모든 노트 간 `[[위키링크]]`로 양방향 연결
+- 접이식 퀴즈(정답 숨김) 자동 생성
+- 완료 후 Obsidian에서 MOC(학습 맵) 자동 열기
+
+---
+
+## 출력 결과
+
+실제 `/deep-study WKWebView` 실행 결과:
+
+```
+Deep Study/WKWebView/
+  assets/infographic.png              ← NotebookLM 인포그래픽
+  00-MOC.md                           ← 학습 맵 + 마인드맵 + 자료 링크
+  01-멀티프로세스 아키텍처.md           ← Mach 포트 기반 IPC 동작 원리
+  02-WKWebViewConfiguration과 생명주기.md
+  03-SwiftUI 통합 (UIViewRepresentable).md
+  04-JavaScript 브릿지.md
+  05-WKContentWorld와 스크립트 격리.md
+  06-Navigation과 로딩 제어.md
+  07-쿠키와 세션 관리.md
+  08-프로세스 종료와 빈 화면 복구.md
+  09-보안 (App-bound Domains, ITP).md
+  10-성능 최적화와 예열.md
+  11-우리 프로젝트 분석.md              ← 우리 코드 분석 + 개선안
+  Practice.md                          ← 접이식 퀴즈 15문제
+```
+
+### 각 개념 노트의 구조
+
+일반적인 API 나열이 아니다. **프레임워크 소스 코드를 읽은 수준의 깊이**를 목표로 한다:
+
+| 섹션 | 내용 |
+|------|------|
+| **핵심 요약** | 3줄 TL;DR — 이것만 읽어도 뭔지 알 수 있게 |
+| **상세 설명** | 내부 동작 원리 + 설계 배경 + Mermaid 다이어그램 |
+| **실전 코드** | 기본 사용법 → 프로덕션 레벨 (복사해서 바로 사용 가능) |
+| **트러블슈팅** | 실제 프로덕션에서 발생하는 버그 + 근본 원인 분석 |
+| **오픈소스 레퍼런스** | 잘 구현된 오픈소스의 특정 파일 링크 |
+| **Related** | `[[위키링크]]`로 관련 노트 연결 |
+
+### Practice.md (퀴즈)
+
+정답이 기본으로 숨겨져 있다 (Obsidian 접이식 callout):
+
+```markdown
+## Q1 - 멀티프로세스 구조 [recall]
+> WKWebView가 사용하는 3개의 프로세스 이름과 역할을 설명하세요.
+
+> [!answer]- 정답 보기
+> 1. App Process: WKWebView 객체 관리...
+> 2. WebContent Process: DOM 파싱, JS 실행...
+> 3. Networking Process: HTTP 요청, 쿠키...
+> [[01-멀티프로세스 아키텍처]]
+```
+
+문제 유형: `[recall]` 개념 확인 / `[application]` 실무 적용 / `[analysis]` 비교 분석 / `[interview]` 면접 대비
+
+---
+
+## 비교: 직접 공부 vs Deep Study
+
+| | 직접 공부 | Deep Study |
+|---|---|---|
+| **소요 시간** | 2-3시간 (구글링 + 읽기) | ~15분 (자동) |
+| **결과물** | 브라우저 탭 15개, 저장된 건 없음 | 10+ Obsidian 노트 |
+| **깊이** | 블로그 표면 훑기 | 내부 동작 원리 + 소스 레벨 |
+| **내 코드** | 분석 안 함 | 패턴 분석 + 개선안 제시 |
+| **기억 유지** | 금요일이면 까먹음 | 퀴즈 + 위키링크 노트로 복습 |
+| **다이어그램** | 없음 | 모든 노트에 Mermaid 다이어그램 |
+
+---
+
+## 주의사항
+
+- **NotebookLM**은 [비공식 API](https://github.com/nicholasgasior/notebooklm-py)를 사용한다. 무료 일일 생성 한도가 있다.
+- **소스 실패**는 흔하다 (Medium, 유료 사이트 등). 스킬이 자동으로 대체 URL을 찾는다.
+- **시각 자료** (인포그래픽, 마인드맵)는 가끔 생성에 실패할 수 있다. 실패해도 나머지는 정상 진행된다.
+- **노트는 한국어**로 작성된다. 검색은 한국어 + 영어 모두 수행한다.
 
 ---
 
@@ -234,60 +257,71 @@ MIT
 
 ---
 
-<h2 id="한국어">한국어 가이드</h2>
+<details>
+<summary><h2 id="english">English Guide</h2></summary>
 
-### 이게 뭔가요?
+### What is this?
 
-**Deep Study**는 Claude Code용 올인원 딥러닝(공부) 스킬입니다.
+**Deep Study** is an all-in-one research skill for Claude Code. Say what you want to study, and it:
 
-공부하고 싶은 주제를 말하면:
-1. 현재 프로젝트에서 관련 코드를 분석하고
-2. 웹에서 8-15개 학습 자료를 자동 수집하고
-3. NotebookLM으로 학습 가이드 + 퀴즈 + 인포그래픽을 생성하고
-4. Obsidian에 10개 이상의 연결된 노트를 작성합니다
+1. Scans your project for topic-related code
+2. Collects 8-15 learning resources from the web
+3. Generates study guide + quiz + flashcards + infographic via NotebookLM
+4. Writes 10+ interconnected Obsidian notes with Mermaid diagrams
 
-### 사용법
-
-```
-/deep-study WKWebView
-```
-
-이 한 줄이면 끝입니다. 커피 한 잔 마시고 오면 Obsidian에 학습 노트가 준비되어 있습니다.
-
-### 설치
+### Install
 
 ```bash
 claude plugin add sunhofficial/deep-study
 ```
 
-### 첫 실행 시 설정
-
-| 설정 | 선택지 |
-|------|--------|
-| **경험 수준** | `junior` (취준생/신입) · `mid` (1-4년) · `senior` (5년+) |
-| **플랫폼** | `ios` · `android` · `web-frontend` · `web-backend` |
-| **언어** | `swift` · `kotlin` · `typescript` · `python` |
-
-설정은 `~/.config/deep-study/config.json`에 저장되며, 다시 묻지 않습니다.
-
-### 출력 예시
+### Usage
 
 ```
-Deep Study/WKWebView/
-  00-MOC.md              ← 학습 맵 + 자료 링크 + 마인드맵
-  01~10-개념노트.md       ← 내부 동작 원리 + Mermaid 다이어그램 + 실전 코드
-  11-우리 프로젝트 분석.md ← 우리 코드 분석 + 개선 포인트
-  Practice.md            ← 접이식 퀴즈 15문제 (정답 숨김)
+/deep-study {topic}
 ```
 
-### 필요한 도구
+That's it. Fully automatic — no confirmations between phases.
 
-- **Claude Code** — `npm install -g @anthropic-ai/claude-code`
-- **Obsidian** — [obsidian.md](https://obsidian.md/)
-- **notebooklm-py** — `pipx install "notebooklm-py[browser]"` 설치 후 `notebooklm login`
+### What You Get
 
-### 주의사항
+```
+Deep Study/{topic}/
+  00-MOC.md            ← Learning map + resources + mind-map
+  01~10-concepts.md    ← Internal mechanics + diagrams + production code
+  11-project.md        ← Your codebase analysis + improvements
+  Practice.md          ← 15 collapsible quiz questions
+```
 
-- NotebookLM은 비공식 API를 사용합니다 (무료 일일 한도 있음)
-- 일부 URL은 NotebookLM에서 크롤링 실패할 수 있습니다 (자동 대체됨)
-- 노트는 한국어로 작성됩니다. 검색은 한국어 + 영어 모두 수행합니다.
+### Prerequisites
+
+| Tool | Install |
+|------|---------|
+| [Claude Code](https://docs.anthropic.com/en/docs/claude-code) | `npm install -g @anthropic-ai/claude-code` |
+| [Obsidian](https://obsidian.md/) | Download from site |
+| [notebooklm-py](https://github.com/nicholasgasior/notebooklm-py) | `pipx install "notebooklm-py[browser]"` then `notebooklm login` |
+
+### Profile Setup (first run only)
+
+| Setting | Options |
+|---------|---------|
+| **Level** | `junior` · `mid` · `senior` |
+| **Platform** | `ios` · `android` · `web-frontend` · `web-backend` |
+| **Language** | `swift` · `kotlin` · `typescript` · `python` |
+
+### How Phases Work
+
+| Phase | What Happens |
+|-------|-------------|
+| **1. Code Scan** | Grep/read your project for topic-related patterns |
+| **2. Web Search** | Collect 8-15 URLs (docs, blogs, YouTube, open-source) |
+| **3. NotebookLM** | Generate study guide, quiz, flashcards, infographic, mind-map |
+| **4. Obsidian** | Write 10+ notes with wikilinks, diagrams, quiz → auto-open MOC |
+
+### Caveats
+
+- **NotebookLM** uses an [unofficial API](https://github.com/nicholasgasior/notebooklm-py). Free tier has daily limits.
+- **Source failures** are common. The skill auto-replaces failed URLs.
+- **Notes are in Korean** by default. Searches run in Korean + English.
+
+</details>
