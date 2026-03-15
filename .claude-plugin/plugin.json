@@ -1,0 +1,10 @@
+{
+  "name": "deep-study",
+  "version": "1.0.0",
+  "description": "All-in-one deep research skill: project code analysis + web/YouTube search + NotebookLM (text + visual artifacts) + Obsidian multi-note output with wikilinks and diagrams",
+  "author": {
+    "name": "sunho"
+  },
+  "license": "MIT",
+  "keywords": ["study", "research", "obsidian", "notebooklm", "learning"]
+}
